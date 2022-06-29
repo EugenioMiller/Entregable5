@@ -30,4 +30,6 @@ class CargarDatos {
            repository.save(new Producto("Leche", 10, 50));
         };
     }
+    
+    
 }

@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ public class Cliente {
 	private String nombre;
 	@Column
 	private String apellido;
+	private ArrayList<Compra> compras;
 	
 	public Cliente() {
 		
@@ -23,6 +26,7 @@ public class Cliente {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.compras = new ArrayList<>();
 	}
 
 	public Long getDni() {
@@ -47,6 +51,28 @@ public class Cliente {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+
+	public Float getMontoTotal() {
+		float total = 0;
+		for(Compra c : compras) {
+			total += c.getTotal();
+		}
+		
+		return total;
+	}
+	
+	public void addCompra(Compra c) {
+		this.compras.add(c);
+	}
+
+	public ArrayList<Compra> getCompras(){
+		return new ArrayList<Compra>(this.compras);
+	}
+	
+	@Override
+	public String toString() {
+		return "El cliente: " + this.nombre + " " + this.apellido  + " gasta un total de: ";
 	}
 	
 	

@@ -60,6 +60,11 @@ public class Producto {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Producto [nombre=" + nombre + ", precio=" + precio + "]";
+	}
 	
 	
 	

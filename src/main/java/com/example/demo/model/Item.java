@@ -29,6 +29,15 @@ public class Item {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+
+	public float getTotal() {
+		return this.producto.getPrecio() * this.cantidad;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [producto=" + producto + ", cantidad=" + cantidad + "]";
+	}
 	
 	
 }

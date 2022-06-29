@@ -7,25 +7,19 @@ public class Compra {
 
 
 	private Date fechaVenta;
-	private Cliente cliente;
 	private ArrayList<Item> items;
 	
 	public Compra() {
 		
 	}
 	
-	public Compra(Cliente c, Date fecha) {
-		this.cliente = c;
+	public Compra(Date fecha) {
 		this.fechaVenta = fecha;
 		this.items = new ArrayList<>();
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void addItem(Item i) {
+		this.items.add(i);
 	}
 
 	public ArrayList<Item> getItems() {
@@ -42,6 +36,20 @@ public class Compra {
 
 	public void setFechaVenta(Date fechaVenta) {
 		this.fechaVenta = fechaVenta;
+	}
+
+	public float getTotal() {
+		float total = 0;
+		for (Item i: items) {
+			total+= i.getTotal();
+		}
+		
+		return total;
+	}
+
+	@Override
+	public String toString() {
+		return "Compra [items=" + items + "]";
 	}
 	
 	
