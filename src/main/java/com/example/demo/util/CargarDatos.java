@@ -15,13 +15,13 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 class CargarDatos {
 
-    /*@Bean
+    @Bean
     CommandLineRunner initCliete(@Qualifier("clienteRepository") ClienteRepository repository) {
         return args -> {
            repository.save(new Cliente((long)37380145, "Eugenio", "Miller"));
            repository.save(new Cliente((long)30303030, "Leonel", "Messi"));
         };
-    }*/
+    }
     
     @Bean
     CommandLineRunner initProducto(@Qualifier("productoRepository") ProductoRepository repository) {

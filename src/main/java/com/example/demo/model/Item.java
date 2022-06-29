@@ -1,20 +1,8 @@
 package com.example.demo.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Entity
 public class Item {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	@ManyToOne
+
 	private Producto producto;
-	@Column
 	private int cantidad;
 	
 	public Item() {
@@ -40,10 +28,6 @@ public class Item {
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
-	}
-
-	public int getId() {
-		return id;
 	}
 	
 	

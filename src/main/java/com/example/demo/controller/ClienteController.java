@@ -43,10 +43,6 @@ public class ClienteController {
         return repository.save(c);
     }
 
-    @RequestMapping(value = "/getCliente/{nombre}")
-    public Cliente getCliente(@PathVariable(value = "name") String nombre) {
-        return repository.findAllByName(nombre).get(0);
-    }
     @GetMapping("/{dni}")
     Optional<Cliente> one(@PathVariable Long dni) {
         return repository.findById(dni);
