@@ -2,18 +2,15 @@ package com.example.demo.DTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.example.demo.model.Cliente;
-import com.example.demo.repository.ClienteRepository;
+import com.example.demo.servicios.ClienteService;
 
-public class DTOTotalPorCliente {
-
-	private ClienteRepository clienteRepo;
+public class ReporteClientes {
+	
 	private HashMap<Cliente, Float> total;
 	
 	public void generarDto() {
-		ArrayList<Cliente> clientes = (ArrayList<Cliente>) clienteRepo.findAll();
-		
+		ArrayList<Cliente> clientes = ClienteService.getInstance().getAll();
 		for(Cliente c : clientes) {
 			total.put(c, c.getMontoTotal());
 		}
