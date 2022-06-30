@@ -3,11 +3,16 @@ package com.example.demo.servicios;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.model.Cliente;
 import com.example.demo.repository.ClienteRepository;
 
+@Service
 public class ClienteService implements BaseServicio<Cliente>{
 
+	@Autowired
 	private static ClienteRepository clienteRepo;
 	@Override
 	public ArrayList<Cliente> getAll() {

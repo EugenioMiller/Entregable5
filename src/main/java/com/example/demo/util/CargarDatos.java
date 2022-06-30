@@ -2,8 +2,8 @@ package com.example.demo.util;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Producto;
-import com.example.demo.repository.ClienteRepository;
-import com.example.demo.repository.ProductoRepository;
+import com.example.demo.servicios.ClienteService;
+import com.example.demo.servicios.ProductoService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,21 +15,21 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 class CargarDatos {
 
-    @Bean
-    CommandLineRunner initCliete(@Qualifier("clienteRepository") ClienteRepository repository) {
+    /*@Bean
+    CommandLineRunner initCliete(@Qualifier("clienteService") ClienteService service) {
         return args -> {
-           repository.save(new Cliente((long)37380145, "Eugenio", "Miller"));
-           repository.save(new Cliente((long)30303030, "Leonel", "Messi"));
+           service.save(new Cliente((long)37380145, "Eugenio", "Miller"));
+           service.save(new Cliente((long)30303030, "Leonel", "Messi"));
         };
     }
     
     @Bean
-    CommandLineRunner initProducto(@Qualifier("productoRepository") ProductoRepository repository) {
+    CommandLineRunner initProducto(@Qualifier("productoService") ProductoService service) {
         return args -> {
-           repository.save(new Producto("Harina", 20, 100));
-           repository.save(new Producto("Leche", 10, 50));
+           service.save(new Producto("Harina", 20, 100));
+           service.save(new Producto("Leche", 10, 50));
         };
-    }
+    }*/
     
     
 }

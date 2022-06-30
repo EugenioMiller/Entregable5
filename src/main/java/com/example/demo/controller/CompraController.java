@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Compra;
-import com.example.demo.model.Producto;
 import com.example.demo.servicios.CompraService;
 
 
@@ -22,11 +21,11 @@ import com.example.demo.servicios.CompraService;
 @RestController
 @RequestMapping("compras")
 public class CompraController {
-	@Qualifier("compraRepository")
+	@Qualifier("compraService")
     @Autowired
     private final CompraService compraServ;
 	
-	public CompraController(@Qualifier("compraRepository") CompraService compraServ) {
+	public CompraController(@Qualifier("compraService") CompraService compraServ) {
         this.compraServ = compraServ;
     }
 

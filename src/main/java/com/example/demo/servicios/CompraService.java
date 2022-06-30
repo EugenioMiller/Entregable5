@@ -3,12 +3,17 @@ package com.example.demo.servicios;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.demo.model.Compra;
 import com.example.demo.repository.CompraRepository;
 
 
-
+@Service
 public class CompraService implements BaseServicio<Compra> {
+	
+	@Autowired
 	private CompraRepository compraRepo;
 	@Override
 	public ArrayList<Compra> getAll() {

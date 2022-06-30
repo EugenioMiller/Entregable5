@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente {
@@ -16,7 +15,6 @@ public class Cliente {
 	private String nombre;
 	@Column
 	private String apellido;
-	@OneToMany
 	private ArrayList<Compra> compras;
 	
 	public Cliente() {

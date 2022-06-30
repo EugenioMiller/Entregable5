@@ -14,11 +14,11 @@ import java.util.Optional;
 
 public class ClienteController {
 
-    @Qualifier("clienteRepository")
+    @Qualifier("clienteService")
     @Autowired
     private final ClienteService clienteServ;
 
-    public ClienteController(@Qualifier("clienteRepository") ClienteService clienteServ) {
+    public ClienteController(@Qualifier("clienteService") ClienteService clienteServ) {
         this.clienteServ = clienteServ;
     }
 

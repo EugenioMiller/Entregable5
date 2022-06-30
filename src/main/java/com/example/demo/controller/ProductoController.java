@@ -21,11 +21,11 @@ import com.example.demo.servicios.ProductoService;
 @RequestMapping("productos")
 public class ProductoController {
 	
-	@Qualifier("productoRepository")
+	@Qualifier("productoService")
     @Autowired
     private final ProductoService produServ;
 
-	public ProductoController(@Qualifier("productoRepository") ProductoService produServ) {
+	public ProductoController(@Qualifier("productoService") ProductoService produServ) {
         this.produServ = produServ;
     }
 	
