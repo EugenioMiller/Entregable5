@@ -3,10 +3,19 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Compra {
 
-
+	@Id
+	private int id;
+	@Column
 	private Date fechaVenta;
+	@OneToMany
 	private ArrayList<Item> items;
 	
 	public Compra() {
@@ -29,7 +38,9 @@ public class Compra {
 	public void setItems(ArrayList<Item> items) {
 		this.items = items;
 	}
-
+	public void setId(int id) {
+		this.id=id;
+	}
 	public Date getFechaVenta() {
 		return fechaVenta;
 	}

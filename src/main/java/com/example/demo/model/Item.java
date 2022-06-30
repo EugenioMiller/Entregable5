@@ -1,8 +1,18 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Item {
 
+	@Id
+	private int id;
+	@OneToOne
 	private Producto producto;
+	@Column
 	private int cantidad;
 	
 	public Item() {
@@ -32,6 +42,16 @@ public class Item {
 
 	public float getTotal() {
 		return this.producto.getPrecio() * this.cantidad;
+	}
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override

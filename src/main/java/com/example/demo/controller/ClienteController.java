@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Cliente;
-import com.example.demo.repository.ClienteRepository;
+import com.example.demo.servicios.ClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,55 +16,44 @@ public class ClienteController {
 
     @Qualifier("clienteRepository")
     @Autowired
-    private final ClienteRepository repository;
+    private final ClienteService clienteServ;
 
-    public ClienteController(@Qualifier("clienteRepository") ClienteRepository repository) {
-        this.repository = repository;
+    public ClienteController(@Qualifier("clienteRepository") ClienteService clienteServ) {
+        this.clienteServ = clienteServ;
     }
 
     @GetMapping("/")
     public Iterable<Cliente> getCliente() {
-        return repository.findAll();
-    }
-
- 
-    @GetMapping("/PorApellido/{apellido}")
-    public Iterable<Cliente> getClientePorApellido(@PathVariable String apellido) {
-        return repository.getClientePorApellido(apellido);
-    }
-
-    @GetMapping("/PorNombre/{nombre}")
-    public Iterable<Cliente> getPersonsByName(@PathVariable String nombre) {
-        return repository.findAllByName(nombre);
+        return clienteServ.getAll();
     }
 
     @PostMapping("/")
     public Cliente nuevoCliente(@RequestBody Cliente c) {
-        return repository.save(c);
+        return clienteServ.save(c);
     }
 
     @GetMapping("/{dni}")
-    Optional<Cliente> one(@PathVariable Long dni) {
-        return repository.findById(dni);
+    Optional<Cliente> one(@PathVariable int dni) {
+        return clienteServ.getById(dni);
     }
 
     @PutMapping("/{id}")
-    Cliente replacePerson(@RequestBody Cliente nuevoCliente, @PathVariable Long id) {
+    Cliente replaceCliente(@RequestBody Cliente nuevoCliente, @PathVariable int id) {
 
-        return repository.findById(id)
+        return clienteServ.getById(id)
                 .map(cliente -> {
                     cliente.setNombre(nuevoCliente.getNombre());
                     cliente.setApellido(nuevoCliente.getApellido());
-                    return repository.save(cliente);
+                    return clienteServ.save(cliente);
                 })
                 .orElseGet(() -> {
                     nuevoCliente.setDni(id);
-                    return repository.save(nuevoCliente);
+                    return clienteServ.save(nuevoCliente);
                 });
     }
 
     @DeleteMapping("/{id}")
-    void deleteCliente(@PathVariable Long id) {
-        repository.deleteById(id);
+    void deleteCliente(@PathVariable int id) {
+    	clienteServ.delete(id);
     }
 }

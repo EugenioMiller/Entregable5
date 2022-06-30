@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Producto;
-import com.example.demo.repository.ProductoRepository;
+import com.example.demo.servicios.ProductoService;
+
 
 @RestController
 @RequestMapping("productos")
@@ -22,45 +23,45 @@ public class ProductoController {
 	
 	@Qualifier("productoRepository")
     @Autowired
-    private final ProductoRepository repository;
+    private final ProductoService produServ;
 
-	public ProductoController(@Qualifier("productoRepository") ProductoRepository repository) {
-        this.repository = repository;
+	public ProductoController(@Qualifier("productoRepository") ProductoService produServ) {
+        this.produServ = produServ;
     }
 	
 	@GetMapping("/")
     public Iterable<Producto> getProductos() {
-        return repository.findAll();
+        return produServ.getAll();
     }
 	
 	@PostMapping("/")
     public Producto nuevoProducto(@RequestBody Producto p) {
-        return repository.save(p);
+        return produServ.save(p);
     }
 	
 	@GetMapping("/{id}")
     Optional<Producto> one(@PathVariable int id) {
-        return repository.findById((long) id);
+        return produServ.getById(id);
     }
 
     @PutMapping("/{id}")
-    Producto replacePerson(@RequestBody Producto nuevoProducto, @PathVariable int id) {
+    Producto replaceProducto(@RequestBody Producto nuevoProducto, @PathVariable int id) {
 
-        return repository.findById((long) id)
+        return produServ.getById(id)
                 .map(producto -> {
                 	producto.setNombre(nuevoProducto.getNombre());
                 	producto.setStock(nuevoProducto.getStock());
                 	producto.setPrecio(nuevoProducto.getPrecio());
-                    return repository.save(producto);
+                    return produServ.save(producto);
                 })
                 .orElseGet(() -> {
                     nuevoProducto.setId(id);
-                    return repository.save(nuevoProducto);
+                    return produServ.save(nuevoProducto);
                 });
     }
 
     @DeleteMapping("/{id}")
-    void deleteCliente(@PathVariable Long id) {
-        repository.deleteById(id);
+    void deleteProducto(@PathVariable int id) {
+        produServ.delete(id);
     }
 }
