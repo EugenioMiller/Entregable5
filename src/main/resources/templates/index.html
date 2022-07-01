@@ -2,18 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8"/>
-        <title>SuperMercado</title>
-        
+        <title>Despensa</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <link th:href="@{/css/estilo.css}" reel="stylesheet" />        
     </head>
     <body>   
-    	<div class="container div1">
-  			<div class="row">
-    			<div class="col-12">SuperMercado</div>
-    		</div> 
+    	<h1>Despensa</h1>
     	</div> 
         <p class="text">Hello</p>
-       <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-primary">Primary</button>
+       
+       
+        <script type="text/javascript" th:src="@{/js/app.js}"></script>
     </body>
 </html>
