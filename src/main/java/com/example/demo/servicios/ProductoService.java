@@ -22,7 +22,7 @@ public class ProductoService implements BaseServicio<Producto>{
 
 	@Override
 	public Optional<Producto> getById(int id) {
-		return produRepo.findById((long) id);
+		return produRepo.findById(id);
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class ProductoService implements BaseServicio<Producto>{
 
 	@Override
 	public void delete(int id) {
-		produRepo.deleteById((long) id);
+		produRepo.deleteById(id);
 	}
 
 	@Override

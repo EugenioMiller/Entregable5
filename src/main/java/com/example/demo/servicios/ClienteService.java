@@ -13,7 +13,7 @@ import com.example.demo.repository.ClienteRepository;
 public class ClienteService implements BaseServicio<Cliente>{
 
 	@Autowired
-	private static ClienteRepository clienteRepo;
+	private ClienteRepository clienteRepo;
 	
 	private static ClienteService clienteService;
 	

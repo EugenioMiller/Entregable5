@@ -4,10 +4,12 @@ import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Compra;
 import com.example.demo.model.Producto;
 
+@Repository
 public interface CompraRepository extends JpaRepository<Compra, Long>{
 	
 	@Query(value = "SELECT * FROM compras WHERE date=:d", nativeQuery = true)

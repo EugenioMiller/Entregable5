@@ -4,7 +4,6 @@ import com.example.demo.model.Cliente;
 import com.example.demo.servicios.ClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -14,11 +13,11 @@ import java.util.Optional;
 
 public class ClienteController {
 
-    @Qualifier("clienteService")
+
     @Autowired
     private final ClienteService clienteServ;
 
-    public ClienteController(@Qualifier("clienteService") ClienteService clienteServ) {
+    public ClienteController(ClienteService clienteServ) {
         this.clienteServ = clienteServ;
     }
 
