@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Item;
+import com.example.demo.model.Producto;
 import com.example.demo.repository.ItemRepository;
+import com.example.demo.util.ProductoDTO;
 
 @Service
 public class ItemService implements BaseServicio<Item>{
@@ -38,6 +40,10 @@ public class ItemService implements BaseServicio<Item>{
 	@Override
 	public void update(Item t, int id) {
 	
+	}
+
+	public ArrayList<ProductoDTO> getItemsConProductoMasVendidos() {
+		return itemRepo.getItemsProductosMasVendido();
 	}
 
 }

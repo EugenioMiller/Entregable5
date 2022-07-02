@@ -22,7 +22,8 @@ import com.example.demo.servicios.CompraService;
 @RequestMapping("compras")
 public class CompraController {
 	@Qualifier("compraService")
-    @Autowired
+    
+	@Autowired
     private final CompraService compraServ;
 	
 	public CompraController(@Qualifier("compraService") CompraService compraServ) {

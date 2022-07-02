@@ -1,27 +1,34 @@
 package com.example.demo.servicios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Compra;
+import com.example.demo.model.Item;
 import com.example.demo.model.Producto;
+import com.example.demo.util.ProductoDTO;
 
+@Service
 public class DTOservice {
-	private static DTOservice serv;
 	
-	public static DTOservice getInstance() {
-		if(serv == null) {
-			serv = new DTOservice();
-		}
-		return serv;
-	}
+	@Autowired
+	private ClienteService cls;
 	
-	@SuppressWarnings("null")
+	@Autowired
+	private CompraService cms;
+	
+	@Autowired
+	private ItemService is;
+	
+	
 	public HashMap<Cliente, Float> getMontoTotalPorCliente() {
-		HashMap<Cliente, Float> total = null;
-		ArrayList<Cliente> clientes = ClienteService.getInstance().getAll();
+		HashMap<Cliente, Float> total = new HashMap<>();
+		ArrayList<Cliente> clientes = cls.getAll();
 		for(Cliente c : clientes) {
 			total.put(c, c.getMontoTotal());
 		}
@@ -29,14 +36,12 @@ public class DTOservice {
 		
 	}
 	
-	public Producto getProductoMasVendido() {
-		ArrayList<Producto> aux= CompraService.getInstance().getProductoMasVendido();
-		Producto p = aux.get(0);
-		return p;
-	}
-	
-	public ArrayList<Compra> traerComprasPorDia(Date date) {
-		ArrayList<Compra> ventas = CompraService.getInstance().getAllByDate(date);
+	public ArrayList<Compra> traerComprasPorDia(LocalDate date) {
+		ArrayList<Compra> ventas = cms.getAllByDate(date);
 		return ventas;
+	}
+
+	public ProductoDTO getProductoMasVendido() {
+		return is.getItemsConProductoMasVendidos().get(0);
 	}
 }

@@ -15,15 +15,6 @@ public class ClienteService implements BaseServicio<Cliente>{
 	@Autowired
 	private ClienteRepository clienteRepo;
 	
-	private static ClienteService clienteService;
-	
-	public static ClienteService getInstance() {
-		if(clienteService == null) {
-			clienteService = new ClienteService();
-		}
-		return clienteService;
-	}
-	
 	@Override
 	public ArrayList<Cliente> getAll() {
 		return (ArrayList<Cliente>) clienteRepo.findAll();

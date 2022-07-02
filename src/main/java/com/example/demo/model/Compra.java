@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 public class Compra {
@@ -20,9 +23,11 @@ public class Compra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column
-	private Date fechaVenta;
-	@OneToMany(cascade={CascadeType.ALL})
+	private LocalDate fecha;
+	@OneToMany(cascade={CascadeType.MERGE})
 	
 	private List<Item> items;
 	
@@ -30,8 +35,8 @@ public class Compra {
 		
 	}
 	
-	public Compra(Date fecha) {
-		this.fechaVenta = fecha;
+	public Compra(LocalDate fecha) {
+		this.fecha = fecha;
 		this.items = new ArrayList<>();
 	}
 
@@ -49,12 +54,12 @@ public class Compra {
 	public void setId(int id) {
 		this.id=id;
 	}
-	public Date getFechaVenta() {
-		return fechaVenta;
+	public LocalDate getFechaVenta() {
+		return this.fecha;
 	}
 
-	public void setFechaVenta(Date fechaVenta) {
-		this.fechaVenta = fechaVenta;
+	public void setFechaVenta(LocalDate fechaVenta) {
+		this.fecha = fechaVenta;
 	}
 
 	public float getTotal() {

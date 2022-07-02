@@ -1,5 +1,6 @@
 package com.example.demo.servicios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Compra;
+import com.example.demo.model.Item;
 import com.example.demo.model.Producto;
 import com.example.demo.repository.CompraRepository;
 
@@ -17,14 +19,7 @@ public class CompraService implements BaseServicio<Compra> {
 	
 	@Autowired
 	private CompraRepository compraRepo;
-	private static CompraService compraService;
-	
-	public static CompraService getInstance() {
-		if(compraService == null) {
-			compraService = new CompraService();
-		}
-		return compraService;
-	}
+
 	@Override
 	public ArrayList<Compra> getAll() {
 		return (ArrayList<Compra>) compraRepo.findAll();
@@ -50,11 +45,8 @@ public class CompraService implements BaseServicio<Compra> {
 		
 	}
 	
-	public ArrayList<Compra> getAllByDate(Date date) {
+	public ArrayList<Compra> getAllByDate(LocalDate date) {
 		return compraRepo.getComprasByDate(date);
-	}
-	public ArrayList<Producto> getProductoMasVendido() {
-		return compraRepo.getProductoMasVendido();
 	}
 
 }

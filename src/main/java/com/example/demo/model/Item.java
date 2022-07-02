@@ -22,11 +22,11 @@ public class Item implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@OneToOne(cascade={CascadeType.ALL})
-	private Producto producto;
+	@OneToOne(cascade={CascadeType.MERGE})
+	private Producto p;
 	@Column
 	private int cantidad;
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne(cascade={CascadeType.MERGE})
 	@Transient
 	private Compra compra;
 	
@@ -35,16 +35,17 @@ public class Item implements Serializable{
 	}
 	
 	public Item(Producto p, int cant) {
-		this.producto = p;
+		this.p = p;
 		this.cantidad = cant;
 	}
+	
 
 	public Producto getProducto() {
-		return producto;
+		return p;
 	}
 
 	public void setProducto(Producto producto) {
-		this.producto = producto;
+		this.p = producto;
 	}
 
 	public int getCantidad() {
@@ -56,7 +57,7 @@ public class Item implements Serializable{
 	}
 
 	public float getTotal() {
-		return this.producto.getPrecio() * this.cantidad;
+		return this.p.getPrecio() * this.cantidad;
 	}
 	
 	
@@ -71,7 +72,7 @@ public class Item implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Item [producto=" + producto + ", cantidad=" + cantidad + "]";
+		return "Item [producto=" + p + ", cantidad=" + cantidad + "]";
 	}
 	
 	
