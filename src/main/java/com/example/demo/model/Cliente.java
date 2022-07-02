@@ -6,11 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 public class Cliente {
-
+	@ApiModelProperty(notes="DNI of the Client",required=true,value="test_dni")
 	@Id
 	private Long dni;
+	@ApiModelProperty(notes="Name of the Client",required=true,value="test_name")
 	@Column
 	private String nombre;
 	@Column
