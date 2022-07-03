@@ -13,12 +13,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * Controlador de la entidad Cliente, que nos provee acceso al service
+ * de la respectiva entidad
+ * @author Aguirre Marcela, Dehesa Romina, Loiza Joaquín, Miller Eugenio
+ * @version 1.0
+ * @see com.example.demo.model.Cliente
+ */
 @RestController
 @RequestMapping("clientes")
 @Api(value="ClienteController",description="REST API Cliente description")
 public class ClienteController {
 
 
+	/**
+	 * @see com.example.demo.servicios.ClienteService
+	 */
     @Autowired
     private final ClienteService clienteServ;
 
@@ -33,15 +43,32 @@ public class ClienteController {
     		@ApiResponse(code=404, message="not found"),
     		
     })
+    
+    /**
+     * Método para obtener una lista de todos los clientes
+     * @return Lista de clientes
+     */
     @GetMapping("/")
     public Iterable<Cliente> getCliente() {
         return clienteServ.getAll();
     }
+    
+    /**
+     * Función para añadir un nuevo cliente
+     * @param Cliente que deseamos añadir
+     * @return Cliente que añadimos
+     */
     @ApiOperation(value="Create a new Client", response=Cliente.class)
     @PostMapping("/")
     public Cliente nuevoCliente(@RequestBody Cliente c) {
         return clienteServ.save(c);
     }
+    
+    /**
+     * Función que nos devuelve un cliente, en base a si id (dni)
+     * @param dni (id del Cliente)
+     * @return Cliente con id buscado
+     */
     @ApiOperation(value="Get a client by DNI", response=Cliente.class)
     @ApiResponses(value= {
     		@ApiResponse(code=200, message="Success|Ok"),
@@ -55,21 +82,21 @@ public class ClienteController {
         return clienteServ.getById(dni);
     }
 
+    /**
+     * Función para editar un cliente existente 
+     * @param Cliente con los nuevos valores a editar
+     * @param id del Cliente que deseamos editar 
+     * @return Cliente con los nuevos atributos 
+     */
     @PutMapping("/{id}")
     Cliente replaceCliente(@RequestBody Cliente nuevoCliente, @PathVariable int id) {
-
-        return clienteServ.getById(id)
-                .map(cliente -> {
-                    cliente.setNombre(nuevoCliente.getNombre());
-                    cliente.setApellido(nuevoCliente.getApellido());
-                    return clienteServ.save(cliente);
-                })
-                .orElseGet(() -> {
-                    nuevoCliente.setDni(id);
-                    return clienteServ.save(nuevoCliente);
-                });
+    	return clienteServ.update(nuevoCliente, id);
     }
 
+    /**
+     * Función para eliminar un cliente con un id determinado
+     * @param id del cliente que deseamos eliminar 
+     */
     @DeleteMapping("/{id}")
     void deleteCliente(@PathVariable int id) {
     	clienteServ.delete(id);

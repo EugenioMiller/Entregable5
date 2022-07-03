@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,7 +14,11 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
+/**
+ * Entidad de Compra
+ * @author Aguirre Marcela, Dehesa Romina, Loiza Joaquín, Miller Eugenio
+ * @version 1.0
+ */
 @Entity
 public class Compra {
 
@@ -44,6 +47,10 @@ public class Compra {
 		this.items.add(i);
 	}
 
+	/**
+	 * Función de obtención de copia del arreglo de Items
+	 * @return ArrayList de Items
+	 */
 	public ArrayList<Item> getItems() {
 		return new ArrayList<Item>(this.items);
 	}
@@ -62,6 +69,11 @@ public class Compra {
 		this.fecha = fechaVenta;
 	}
 
+	/**
+	 * Función utilizada para obtener la el gasto
+	 * total por todos los items 
+	 * @return float con el gasto total
+	 */
 	public float getTotal() {
 		float total = 0;
 		for (Item i: items) {

@@ -10,15 +10,26 @@ import com.example.demo.servicios.ItemService;
 import com.example.demo.servicios.ProductoService;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Clase de creación de datos
+ * @author Aguirre Marcela, Dehesa Romina, Loiza Joaquín, Miller Eugenio
+ * @version 1.0
+ */
 @Configuration
 class CargarDatos {
 
+	/**
+	 * Lógica de inserción de datos 
+	 * @param sc Cliente servicio para agregar Cliente
+	 * @param sp Producto servicio para agregar un producto
+	 * @param si Item servicio para agregar un servicio
+	 * @param cs Compra servicio para agregar una compra
+	 */
 	@Bean
     CommandLineRunner initCliente(ClienteService sc, ProductoService sp, ItemService si, CompraService cs) {
         return args -> {

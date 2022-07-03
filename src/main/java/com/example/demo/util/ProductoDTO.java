@@ -2,7 +2,14 @@ package com.example.demo.util;
 
 import com.example.demo.model.Producto;
 
+/**
+ * Clase auxiliar para la entidad para crear registro del DTO
+ * @author Aguirre Marcela, Dehesa Romina, Loiza Joaquín, Miller Eugenio
+ * @version 1.1
+ * @see com.example.demo.model.Producto
+ */
 public class ProductoDTO {
+	
 	private Producto p; 
 	private long cantidad;
 	

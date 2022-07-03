@@ -8,6 +8,12 @@ import javax.persistence.Id;
 
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * Entidad de Cliente
+ * @author Aguirre Marcela, Dehesa Romina, Loiza Joaquín, Miller Eugenio
+ * @version 1.0
+ */
+
 @Entity
 public class Cliente {
 	@ApiModelProperty(notes="DNI of the Client",required=true,value="test_dni")
@@ -56,6 +62,11 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 
+	/**
+	 * Función que calcula el total gastado por 
+	 * el cliente, en una compra
+	 * @return float con el calor total gastado
+	 */
 	public Float getMontoTotal() {
 		float total = 0;
 		for(Compra c : compras) {

@@ -36,8 +36,12 @@ public class ProductoService implements BaseServicio<Producto>{
 	}
 
 	@Override
-	public void update(Producto t, int id) {
-		
+	public Producto update(Producto t, int id) {
+		@SuppressWarnings("deprecation")
+		Producto p = produRepo.getById(id);
+		p = t;
+		produRepo.save(p);
+		return p;
 	}
 
 }

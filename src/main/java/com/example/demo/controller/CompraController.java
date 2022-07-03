@@ -17,12 +17,21 @@ import com.example.demo.model.Compra;
 import com.example.demo.servicios.CompraService;
 
 
-
+/**
+ * Controlador de la entidad Compra, que nos provee acceso al service
+ * de la respectiva entidad
+ * @author Aguirre Marcela, Dehesa Romina, Loiza Joaquín, Miller Eugenio
+ * @version 1.0
+ * @see com.example.demo.model.Compra
+ */
 @RestController
 @RequestMapping("compras")
 public class CompraController {
+	
+	/**
+	 * @see com.example.demo.servicios.CompraService
+	 */
 	@Qualifier("compraService")
-    
 	@Autowired
     private final CompraService compraServ;
 	
@@ -30,35 +39,50 @@ public class CompraController {
         this.compraServ = compraServ;
     }
 
+	/**
+	 * Función utilizada pata obtener las compras realizadas
+	 * @return Lista de compras
+	 */
 	@GetMapping("/")
     public Iterable<Compra> getCompras() {
         return compraServ.getAll();
     }
 	
+	/**
+	 * Función para agregar una nueva comrpa
+	 * @param Compra que deseamos añadir
+	 * @return Compra finalmente añadida
+	 */
 	@PostMapping("/")
     public Compra nuevoProducto(@RequestBody Compra c) {
         return compraServ.save(c);
     }
 	
+	/**
+	 * Función utilizada para obtener una compra según un id determinado
+	 * @param id de la compra que deseamos obtener
+	 * @return La compra con el id especificado
+	 */
 	@GetMapping("/{id}")
     Optional<Compra> one(@PathVariable int id) {
         return compraServ.getById(id);
     }
 
+	/**
+	 * Función para editar una compra 
+	 * @param Compra con los datos editados
+	 * @param id de la compra que estamos editando
+	 * @return Compra editada
+	 */
     @PutMapping("/{id}")
     Compra replaceCompra(@RequestBody Compra nuevoCompra, @PathVariable int id) {
-
-        return compraServ.getById(id)
-                .map(compra -> {
-                	compra.setFechaVenta(nuevoCompra.getFechaVenta());
-                    return compraServ.save(compra);
-                })
-                .orElseGet(() -> {
-                	nuevoCompra.setId(id);
-                    return compraServ.save(nuevoCompra);
-                });
+    	return compraServ.update(nuevoCompra, id);
     }
 
+    /**
+     * Función utilizada para eliminar una compra con un id determinado
+     * @param id de la compra que deseamos eliminar 
+     */
     @DeleteMapping("/{id}")
     void deleteProducto(@PathVariable int id) {
         compraServ.delete(id);

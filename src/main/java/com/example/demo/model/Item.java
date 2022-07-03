@@ -11,7 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-
+/**
+ * Enridad de Item, tiene un producto y la cantidad de ese producto. 
+ * @author Aguirre Marcela, Dehesa Romina, Loiza Joaquín, Miller Eugenio
+ * @version 1.0
+ */
 @Entity
 public class Item implements Serializable{
 
@@ -59,8 +63,6 @@ public class Item implements Serializable{
 	public float getTotal() {
 		return this.p.getPrecio() * this.cantidad;
 	}
-	
-	
 
 	public int getId() {
 		return id;
