@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.example.demo.model.Item;
 import com.example.demo.servicios.ItemService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * Controlador de la entidad Item, que nos provee acceso al service
@@ -25,6 +31,7 @@ import com.example.demo.servicios.ItemService;
  */
 @RestController
 @RequestMapping("items")
+@Api(value="ItemController",description="REST API Item description")
 public class ItemController {
 	
 	/**
@@ -42,6 +49,15 @@ public class ItemController {
 	 * Función utilizada para obtener la lista de Items existentes
 	 * @return Lista de Items
 	 */
+	 @ApiOperation(value="Get list of Items",response=Iterable.class)
+	    @ApiResponses(value= {
+	    		@ApiResponse(code=200, message="Success|Ok"),
+	    		@ApiResponse(code=401, message="not autorized!"),
+	    		@ApiResponse(code=403, message="forbidden!"),
+	    		@ApiResponse(code=404, message="not found"),
+	    		@ApiResponse(code=500, message="Error del servidor")
+	    		
+	    })
 	@GetMapping("/")
     public Iterable<Item> getItems() {
         return itemServ.getAll();
@@ -52,6 +68,15 @@ public class ItemController {
 	 * @param Item que deseamos persistir
 	 * @return Item finalmente agregado
 	 */
+	 @ApiOperation(value="Create a new item", response=Item.class)
+	    @ApiResponses(value= {
+	    		@ApiResponse(code=200, message="Success|Ok"),
+	    		@ApiResponse(code=401, message="not autorized!"),
+	    		@ApiResponse(code=403, message="forbidden!"),
+	    		@ApiResponse(code=404, message="not found"),
+	    		@ApiResponse(code=500, message="Error del servidor")
+	    		
+	    })
 	@PostMapping("/")
     public Item nuevoItem(@RequestBody Item i) {
         return itemServ.save(i);
@@ -62,6 +87,15 @@ public class ItemController {
 	 * @param id del item que deseamos obtener
 	 * @return Item con el id ingresado
 	 */
+	   @ApiOperation(value="Get a item by  id", response=Item.class)
+	    @ApiResponses(value= {
+	    		@ApiResponse(code=200, message="Success|Ok"),
+	    		@ApiResponse(code=401, message="not autorized!"),
+	    		@ApiResponse(code=403, message="forbidden!"),
+	    		@ApiResponse(code=404, message="not found"),
+	    		@ApiResponse(code=500, message="Error del servidor")
+	    		
+	    })
 	@GetMapping("/{id}")
     Optional<Item> one(@PathVariable int id) {
         return itemServ.getById(id);
@@ -73,6 +107,15 @@ public class ItemController {
 	 * @param id del item que estamos editando
 	 * @return Item modificado
 	 */
+	   @ApiOperation(value="Update a item", response=Item.class)
+	    @ApiResponses(value= {
+	    		@ApiResponse(code=200, message="Success|Ok"),
+	    		@ApiResponse(code=401, message="not autorized!"),
+	    		@ApiResponse(code=403, message="forbidden!"),
+	    		@ApiResponse(code=404, message="not found"),
+	    		@ApiResponse(code=500, message="Error del servidor")
+	    		
+	    })
     @PutMapping("/{id}")
     Item replaceItem(@RequestBody Item nuevoItem, @PathVariable int id) {
         return itemServ.update(nuevoItem, id);
@@ -82,6 +125,15 @@ public class ItemController {
      * Función para eliminar un item 
      * @param id del item que deseamos eliminar
      */
+	   @ApiOperation(value="Delete a item by id")
+	    @ApiResponses(value= {
+	    		@ApiResponse(code=200, message="Success|Ok"),
+	    		@ApiResponse(code=401, message="not autorized!"),
+	    		@ApiResponse(code=403, message="forbidden!"),
+	    		@ApiResponse(code=404, message="not found"),
+	    		@ApiResponse(code=500, message="Error del servidor")
+	    		
+	    })
     @DeleteMapping("/{id}")
     void deleteItem(@PathVariable int id) {
         itemServ.delete(id);

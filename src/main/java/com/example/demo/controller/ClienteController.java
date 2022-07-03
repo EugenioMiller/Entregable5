@@ -35,19 +35,20 @@ public class ClienteController {
     public ClienteController(ClienteService clienteServ) {
         this.clienteServ = clienteServ;
     }
+
+    /**
+     * Método para obtener una lista de todos los clientes
+     * @return Lista de clientes
+     */
     @ApiOperation(value="Get list of Clients", response=Iterable.class)
     @ApiResponses(value= {
     		@ApiResponse(code=200, message="Success|Ok"),
     		@ApiResponse(code=401, message="not autorized!"),
     		@ApiResponse(code=403, message="forbidden!"),
     		@ApiResponse(code=404, message="not found"),
+    		@ApiResponse(code=500, message="Error del servidor")
     		
     })
-    
-    /**
-     * Método para obtener una lista de todos los clientes
-     * @return Lista de clientes
-     */
     @GetMapping("/")
     public Iterable<Cliente> getCliente() {
         return clienteServ.getAll();
@@ -59,6 +60,14 @@ public class ClienteController {
      * @return Cliente que añadimos
      */
     @ApiOperation(value="Create a new Client", response=Cliente.class)
+    @ApiResponses(value= {
+    		@ApiResponse(code=200, message="Success|Ok"),
+    		@ApiResponse(code=401, message="not autorized!"),
+    		@ApiResponse(code=403, message="forbidden!"),
+    		@ApiResponse(code=404, message="not found"),
+    		@ApiResponse(code=500, message="Error del servidor")
+    		
+    })
     @PostMapping("/")
     public Cliente nuevoCliente(@RequestBody Cliente c) {
         return clienteServ.save(c);
@@ -75,6 +84,7 @@ public class ClienteController {
     		@ApiResponse(code=401, message="not autorized!"),
     		@ApiResponse(code=403, message="forbidden!"),
     		@ApiResponse(code=404, message="not found"),
+    		@ApiResponse(code=500, message="Error del servidor")
     		
     })
     @GetMapping("/{dni}")
@@ -88,6 +98,15 @@ public class ClienteController {
      * @param id del Cliente que deseamos editar 
      * @return Cliente con los nuevos atributos 
      */
+    @ApiOperation(value="Update a client", response=Cliente.class)
+    @ApiResponses(value= {
+    		@ApiResponse(code=200, message="Success|Ok"),
+    		@ApiResponse(code=401, message="not autorized!"),
+    		@ApiResponse(code=403, message="forbidden!"),
+    		@ApiResponse(code=404, message="not found"),
+    		@ApiResponse(code=500, message="Error del servidor")
+    		
+    })
     @PutMapping("/{id}")
     Cliente replaceCliente(@RequestBody Cliente nuevoCliente, @PathVariable int id) {
     	return clienteServ.update(nuevoCliente, id);
@@ -97,6 +116,15 @@ public class ClienteController {
      * Función para eliminar un cliente con un id determinado
      * @param id del cliente que deseamos eliminar 
      */
+    @ApiOperation(value="Delete a client by DNI")
+    @ApiResponses(value= {
+    		@ApiResponse(code=200, message="Success|Ok"),
+    		@ApiResponse(code=401, message="not autorized!"),
+    		@ApiResponse(code=403, message="forbidden!"),
+    		@ApiResponse(code=404, message="not found"),
+    		@ApiResponse(code=500, message="Error del servidor")
+    		
+    })
     @DeleteMapping("/{id}")
     void deleteCliente(@PathVariable int id) {
     	clienteServ.delete(id);
