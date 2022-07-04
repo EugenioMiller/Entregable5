@@ -38,8 +38,6 @@ class CargarDatos {
         	sp.save(p);
         	sp.save(p1);
         	
-        	sc.save(new Cliente((long)37380145, "Eugenio", "Miller"));
-        	sc.save(new Cliente((long)30303030, "Leonel", "Messi"));
         	
         	Item i1 = new Item (p , 2);
         	si.save(i1);
@@ -49,8 +47,13 @@ class CargarDatos {
         	si.save(i3);
         	
         	Compra c = new Compra (LocalDate.of(2022, 8, 22));
-            c.addItem(i1);
-            cs.save(c);
+        	c.addItem(i1);
+        	cs.save(c);
+        	
+        	Cliente c1 = new Cliente((long)37380145, "Eugenio", "Miller");
+        	Cliente c2 = new Cliente((long)30303030, "Leonel", "Messi");
+        	sc.save(c1);
+        	sc.save(c2);
         };
     }
   

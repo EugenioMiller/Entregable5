@@ -1,10 +1,13 @@
 package com.example.demo.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -15,7 +18,8 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 @Entity
-public class Cliente {
+public class Cliente{
+	
 	@ApiModelProperty(notes="DNI of the Client",required=true)
 	@Id
 	private Long dni;
@@ -24,7 +28,8 @@ public class Cliente {
 	private String nombre;
 	@Column
 	private String apellido;
-	private ArrayList<Compra> compras;
+	@OneToMany(cascade={CascadeType.MERGE})
+	private List<Compra> compras;
 	
 	public Cliente() {
 		
@@ -86,7 +91,7 @@ public class Cliente {
 	
 	@Override
 	public String toString() {
-		return "El cliente: " + this.nombre + " " + this.apellido  + " gasta un total de: ";
+		return "El cliente: " + this.nombre + " " + this.apellido  + " gasta un total de: " + this.getMontoTotal();
 	}
 	
 	

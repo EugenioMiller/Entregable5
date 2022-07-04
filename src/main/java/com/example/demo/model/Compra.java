@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @version 1.0
  */
 @Entity
-public class Compra {
+public class Compra implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -57,6 +63,9 @@ public class Compra {
 
 	public void setItems(ArrayList<Item> items) {
 		this.items = items;
+	}
+	public int getId() {
+		return this.id;
 	}
 	public void setId(int id) {
 		this.id=id;

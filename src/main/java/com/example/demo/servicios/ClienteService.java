@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cliente;
+import com.example.demo.model.Compra;
 import com.example.demo.repository.ClienteRepository;
 
 /**
@@ -73,6 +74,14 @@ public class ClienteService implements BaseServicio<Cliente>{
 		@SuppressWarnings("deprecation")
 		Cliente c = clienteRepo.getById((long)id);
 		c = t;
+		clienteRepo.save(c);
+		return c;
+	}
+
+	public Cliente comprar(Compra compra, int x) {
+		@SuppressWarnings("deprecation")
+		Cliente c = clienteRepo.getById((long)x);
+		c.addCompra(compra);
 		clienteRepo.save(c);
 		return c;
 	}

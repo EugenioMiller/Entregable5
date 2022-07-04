@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Cliente;
+import com.example.demo.model.Compra;
 import com.example.demo.servicios.ClienteService;
 
 import io.swagger.annotations.Api;
@@ -107,9 +108,30 @@ public class ClienteController {
     		@ApiResponse(code=500, message="Error del servidor")
     		
     })
+    
     @PutMapping("/{id}")
     Cliente replaceCliente(@RequestBody Cliente nuevoCliente, @PathVariable int id) {
     	return clienteServ.update(nuevoCliente, id);
+    }
+    
+    /**
+     * Función para editar un cliente existente 
+     * @param Cliente con los nuevos valores a editar
+     * @param id del Cliente que deseamos editar 
+     * @return Cliente con los nuevos atributos 
+     */
+    @ApiOperation(value="Update a client", response=Cliente.class)
+    @ApiResponses(value= {
+    		@ApiResponse(code=200, message="Success|Ok"),
+    		@ApiResponse(code=401, message="not autorized!"),
+    		@ApiResponse(code=403, message="forbidden!"),
+    		@ApiResponse(code=404, message="not found"),
+    		@ApiResponse(code=500, message="Error del servidor")
+    		
+    })
+    @PutMapping("/comprar/{id}")
+    Cliente comprar(@RequestBody Compra compra, @PathVariable int id) {
+    	return clienteServ.comprar(compra, id);
     }
 
     /**
