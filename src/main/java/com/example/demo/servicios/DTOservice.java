@@ -38,13 +38,13 @@ public class DTOservice {
 	
 	/**
 	 * Función para obtener el monto de cada cliente
-	 * @return HasMap de un cliente y su gasto 
+	 * @return ArrayList de un cliente y su gasto 
 	 */
-	public HashMap<Cliente, Float> getMontoTotalPorCliente() {
-		HashMap<Cliente, Float> total = new HashMap<>();
+	public ArrayList<String> getMontoTotalPorCliente() {
+		ArrayList<String> total = new ArrayList<>();
 		ArrayList<Cliente> clientes = cls.getAll();
 		for(Cliente c : clientes) {
-			total.put(c, c.getMontoTotal());
+			total.add("El cliente = " + c.getNombre() + " hizo un monto total de = "+ c.getMontoTotal());
 		}
 		return total;
 		

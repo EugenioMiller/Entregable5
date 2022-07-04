@@ -72,7 +72,7 @@ public class DtoController {
 	    		
 	    })
 	@GetMapping("/totalPorCliente")
-    public HashMap<Cliente, Float> getClientes() {
+    public ArrayList<String> getClientes() {
         return d.getMontoTotalPorCliente();
     }
 	
