@@ -15,6 +15,11 @@ import com.example.demo.model.Compra;
 import com.example.demo.servicios.DTOservice;
 import com.example.demo.util.ProductoDTO;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 
 /**
  * Controlador DTO, que nos provee acceso al service
@@ -24,6 +29,7 @@ import com.example.demo.util.ProductoDTO;
  */
 @RestController
 @RequestMapping("dto") 
+@Api(value="DTOController",description="REST API DTO description")
 public class DtoController {
 	
 	/**
@@ -37,6 +43,15 @@ public class DtoController {
 	 * @return ProductoDTO 
 	 * @see com.example.demo.util.ProductoDTO
 	 */
+	  @ApiOperation(value="Get the best-selling product", response=ProductoDTO.class)
+	    @ApiResponses(value= {
+	    		@ApiResponse(code=200, message="Success|Ok"),
+	    		@ApiResponse(code=401, message="not autorized!"),
+	    		@ApiResponse(code=403, message="forbidden!"),
+	    		@ApiResponse(code=404, message="not found"),
+	    		@ApiResponse(code=500, message="Error del servidor")
+	    		
+	    })
 	@GetMapping("/")
     public ProductoDTO prodcutoMasVendido() {
         return  d.getProductoMasVendido();
@@ -47,6 +62,15 @@ public class DtoController {
 	 * de las compras que realizaron
 	 * @return HashMap de clientes con el gasto realizado 
 	 */
+	  @ApiOperation(value="Get the total for each clients", response=HashMap.class)
+	    @ApiResponses(value= {
+	    		@ApiResponse(code=200, message="Success|Ok"),
+	    		@ApiResponse(code=401, message="not autorized!"),
+	    		@ApiResponse(code=403, message="forbidden!"),
+	    		@ApiResponse(code=404, message="not found"),
+	    		@ApiResponse(code=500, message="Error del servidor")
+	    		
+	    })
 	@GetMapping("/totalPorCliente")
     public HashMap<Cliente, Float> getClientes() {
         return d.getMontoTotalPorCliente();
@@ -57,6 +81,15 @@ public class DtoController {
 	 * @param date día seleccionado
 	 * @return Lista de compras realizadas ese día 
 	 */
+	  @ApiOperation(value="Getsales per day", response=HashMap.class)
+	    @ApiResponses(value= {
+	    		@ApiResponse(code=200, message="Success|Ok"),
+	    		@ApiResponse(code=401, message="not autorized!"),
+	    		@ApiResponse(code=403, message="forbidden!"),
+	    		@ApiResponse(code=404, message="not found"),
+	    		@ApiResponse(code=500, message="Error del servidor")
+	    		
+	    })
 	@GetMapping("/ventas/{date}")
     public ArrayList<Compra> reporteVentas(@PathVariable String date) {
 		LocalDate dt = LocalDate.parse(date);

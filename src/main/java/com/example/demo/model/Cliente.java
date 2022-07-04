@@ -16,10 +16,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Cliente {
-	@ApiModelProperty(notes="DNI of the Client",required=true,value="test_dni")
+	@ApiModelProperty(notes="DNI of the Client",required=true)
 	@Id
 	private Long dni;
-	@ApiModelProperty(notes="Name of the Client",required=true,value="test_name")
+	@ApiModelProperty(notes="Name of the Client",required=true)
 	@Column
 	private String nombre;
 	@Column
